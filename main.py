@@ -6,13 +6,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 # Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # List your allowed origins here
-    allow_credentials=True,
-    allow_methods=["*"],  # You can specify allowed methods, or use ["*"] to allow all
-    allow_headers=["*"],  # You can specify allowed headers, or use ["*"] to allow all
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["http://localhost:3000"],  # List your allowed origins here
+#     allow_credentials=True,
+#     allow_methods=["*"],  # You can specify allowed methods, or use ["*"] to allow all
+#     allow_headers=["*"],  # You can specify allowed headers, or use ["*"] to allow all
+# )
 
 @app.get("/")
 async def root():
