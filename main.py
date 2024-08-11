@@ -21,3 +21,15 @@ async def root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
+    
+class Item(BaseModel):
+    name: str
+    description: str = None
+    price: float
+    tax: float = None
+
+# Define a POST endpoint
+@app.post("/items/")
+async def create_item(item: Item):
+    # Simulate item creation
+    return {"name": item.name, "price": item.price, "description": item.description, "tax": item.tax}
