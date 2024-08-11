@@ -22,14 +22,16 @@ async def root():
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
     
+# Define a Pydantic model for the request body
 class Item(BaseModel):
     name: str
     description: str = None
     price: float
     tax: float = None
 
-# Define a POST endpoint
+# Define a synchronous POST endpoint
 @app.post("/items/")
-async def create_item(item: Item):
-    # Simulate item creation
+def create_item(item: Item):
+    # Simulate item creation and processing
     return {"name": item.name, "price": item.price, "description": item.description, "tax": item.tax}
+
