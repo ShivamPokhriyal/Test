@@ -26,23 +26,22 @@ app = FastAPI()
 #     allow_headers=["*"],  # You can specify allowed headers, or use ["*"] to allow all
 # )
 
-# Define your CORS headers
+
 CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",  # Change "*" to a specific domain as needed
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Origin": "*",  
+    "Access-Control-Allow-Methods": "*", 
+    "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Credentials": "true"
 }
 
 @app.middleware("http")
-async def add_cors_headers(request: Request, call_next):
-    logger.debug("Processing request: %s", request.url.path)
+async def debug_cors_issue(request: Request, call_next):
+    logger.debug("Received request: %s", request.url.path)
     response = await call_next(request)
     
-    # Add CORS headers to the response
     for header, value in CORS_HEADERS.items():
         response.headers[header] = value
-        logger.debug("Added CORS header: %s: %s", header, value)
+        logger.debug("Append header: %s: %s", header, value)
     
     return response
 
