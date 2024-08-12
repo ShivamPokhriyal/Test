@@ -2,7 +2,13 @@ from typing import Optional
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
+class Item(BaseModel):
+    name: str
+    description: str
+    price: float
+    tax: float = None
 
 app = FastAPI()
 # Add CORS middleware
@@ -24,7 +30,6 @@ def read_item(item_id: int, q: Optional[str] = None):
 
 # Define a synchronous POST endpoint
 @app.post("/items/")
-def create_item(item: int):
-    # Simulate item creation and processing
-    return {"received": item}
+def create_item(item: Item):
+    return {"item": item}
 
